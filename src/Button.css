@@ -1,0 +1,66 @@
+.round-btn {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+}
+
+.rec-1 {
+    position: absolute;
+    background: #FFFFFF;
+    height: 3px;
+    width: 21px;
+}
+
+.rec-2 {
+    position: absolute;
+    background: #FFFFFF;
+    width: 3px;
+    height: 21px;
+}
+
+.plus-btn .rec-1 {
+    left: calc(50% - 21px/2);
+    top: calc(50% - 3px/2);
+}
+
+.plus-btn .rec-2 {
+    top: calc(50% - 21px/2);
+    left: calc(50% - 3px/2);
+}
+
+.plus-btn .btn-text, .cross-btn .btn-text {
+    display: none;
+}
+
+.cross-btn .rec-1 {
+    left: calc(50% - 21px/2);
+    top: calc(50% - 3px/2);
+    transform: matrix(0.71, -0.71, 0.71, 0.71, 0, 0);
+}
+
+.cross-btn .rec-2 {
+    top: calc(50% - 21px/2);
+    left: calc(50% - 3px/2);
+    transform: matrix(0.71, -0.71, 0.71, 0.71, 0, 0);
+}
+
+.yes-btn .rec-1, .yes-btn .rec-2, .no-btn .rec-1, .no-btn .rec-2 {
+    display: none;
+}
+
+.btn-text {
+    position: absolute;
+    width: 70px;
+    height: 21px;
+    left: calc(50% - 70px/2);
+    top: calc(50% - 21px/2);
+    font-family: Rubik;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: center;
+}
