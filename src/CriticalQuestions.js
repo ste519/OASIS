@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, MenuItem} from '@material-ui/core';
+import { TextField, MenuItem } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Fab } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
@@ -7,8 +7,18 @@ import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import { DatePicker } from "@material-ui/pickers";
 import Pop from './Pop';
+import Text from './text.json';
+import moment from 'moment'
+import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 
-const warning = "People you spend more than 15 minutes with.";
+const contactText = Text["Close Contacts"].texts
+const contactListIndex = Text["Close Contacts"].listIndex
+const contactLinkIndex = Text["Close Contacts"].linkIndex
+const travelText = Text["Recent Travel"].texts
+const travelListIndex = Text["Recent Travel"].listIndex
+const travelLinkIndex = Text["Recent Travel"].linkIndex
+const professions = Text["Profession"]
+
 const ethnicities = [
     { value: 'White', label: 'White' },
     { value: 'American Indian or Alaska Native', label: 'American Indian or Alaska Native' },
@@ -23,10 +33,13 @@ const styles = theme => ({
             margin: theme.spacing(1),
             width: '25ch',
         },
-        position: 'absolute',
+        textAlign: 'left',
         width: '90vw',
-        top: '20%;',
-        left: '5vw'
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'auto',
+        height: 'max-content',
+        maxHeight: '68%'
     },
     input: {
         color: 'white',
@@ -46,9 +59,16 @@ function CriticalQuestions(props) {
     const [sex, setSex] = useState('');
     const [ethnicity, setEthnicity] = useState('');
     const [origin, setOrigin] = useState('');
+    const [profession, setProfession] = useState('');
     const [selectedDate, handleDateChange] = useState(null);
+    const [selectedEndDate, handleEndDateChange] = useState(null);
+
+    const [travelDates, setTravelDates] = useState({0:null});
+    const [travelDatesIndex, setTravelDatesIndex] = useState(0);
+
     const [contactCount, setContactCount] = useState(0)
     const [locationCount, setLocationCount] = useState(0)
+
     const handleSexChange = (event) => {
         setSex(event.target.value);
     };
@@ -59,9 +79,36 @@ function CriticalQuestions(props) {
         setOrigin(event.target.value);
     };
 
+    const handleProfessionChange = (event) => {
+        setProfession(event.target.value);
+    };
+
+
+    function handleTravelDateChange(date){
+        console.log(travelDatesIndex);
+        setTravelDates({...travelDates, [travelDatesIndex]:date});
+        
+        console.log(travelDates);
+        
+    };
+    
+
     const [error, setError] = React.useState(null);
     const [isLoaded, setIsLoaded] = React.useState(false);
     const [countries, setCountries] = React.useState([]);
+
+
+    const recovered = (localStorage.isSick === "not sick") && (localStorage.tested === "positive")
+    const endPicker = <DatePicker
+        autoOk
+        label="When did your illness resolve?"
+        clearable
+        disableFuture
+        value={selectedEndDate}
+        onChange={handleEndDateChange}
+        InputProps={{ className: classes.input }}
+        InputLabelProps={{ className: classes.label }}
+    />
 
     React.useEffect(() => {
         fetch("https://restcountries.eu/rest/v2/all?fields=name")
@@ -80,7 +127,7 @@ function CriticalQuestions(props) {
 
 
     const contacts = [];
-    for (let i = 0; i < contactCount; i += 1) {
+    for (let i = 0; i < contactCount; i++) {
         contacts.push(
             <div key={i}>
                 <TextField label="Email" InputProps={{ className: classes.input }}
@@ -91,18 +138,21 @@ function CriticalQuestions(props) {
     }
 
     const locations = [];
-    for (let i = 0; i < locationCount; i += 1) {
+    for (let i = 0; i < locationCount; i++) {
         locations.push(
             <div key={i}>
                 <TextField label="Location" InputProps={{ className: classes.input }}
                     InputLabelProps={{ className: classes.label }} />
                 <DatePicker
-                    autoOk
+                    // autoOk
                     label="Date"
+                    key={i}
+                    id={`hi-${i}`}
                     clearable
                     disableFuture
-                    value={selectedDate}
-                    onChange={handleDateChange}
+                    value={travelDates[i]}
+                    onOpen={()=>setTravelDatesIndex(i)}
+                    onChange={(date)=>handleTravelDateChange(date)}
                     InputProps={{ className: classes.input }}
                     InputLabelProps={{ className: classes.label }}
                 />
@@ -119,17 +169,21 @@ function CriticalQuestions(props) {
     React.useEffect(scrollToBottom, [contacts]);
     let showDatePicker;
     let nextPage;
-    if (localStorage.isSick == "not sick" ){
-        nextPage="/dashboard";
-        if (localStorage.tested == "not tested")
+    if (localStorage.isSick === "not sick") {
+        nextPage = "/dashboard";
+        if (localStorage.tested === "not tested")
             showDatePicker = "hidden";
+        else if (localStorage.tested === "positive") {
+            showDatePicker = "";
+            nextPage = "/symptoms"
+        }
         else {
             showDatePicker = "";
         }
     }
     else {
         showDatePicker = "";
-        nextPage="/symptoms"
+        nextPage = "/symptoms"
     }
 
     return (
@@ -149,6 +203,8 @@ function CriticalQuestions(props) {
                             InputProps={{ className: classes.input }}
                             InputLabelProps={{ className: classes.label }}
                         />
+                        {recovered ? endPicker : null}
+
 
                     </div>
                     <div className="demographics">
@@ -204,27 +260,54 @@ function CriticalQuestions(props) {
                                 </MenuItem>
                             ))}
                         </TextField>
-                        <TextField id="standard-required" label="Profession" InputProps={{ className: classes.input }}
+                        <TextField
+                            select
+                            label="Profession"
+                            value={profession}
+                            onChange={handleProfessionChange}
+                            InputProps={{ className: classes.input }}
+                            InputLabelProps={{ className: classes.label }}
+                        >
+                            {professions.map((option) => (
+                                <MenuItem style={{ fontSize: 13 }} key={option} value={option}>
+                                    {option}
+                                </MenuItem>
+                            ))}
+                        </TextField>
+
+                        {/* <TextField id="standard-required" label="Profession" InputProps={{ className: classes.input }}
                             InputLabelProps={{
                                 className: classes.label
-                            }} />
+                            }} /> */}
                     </div>
                     <div className="form-row">
                         <Fab style={{ background: "#EA2027" }} aria-label="add" size="medium" className="fab" onClick={() => setContactCount(contactCount + 1)}>
                             <AddIcon />
                         </Fab>
                         <p>Close Contacts</p>
-                        <Pop text={warning}></Pop>
+                        <Pop
+                            label={<ErrorOutlineIcon />}
+                            title={<span></span>}
+                            texts={contactText}
+                            linkIndex={contactLinkIndex}
+                            listIndex={contactListIndex} />
+
                     </div>
                     {contacts}
                     <div className="form-row">
                         <Fab style={{ background: "#EA2027" }} aria-label="add" size="medium" className="fab" onClick={() => setLocationCount(locationCount + 1)}>
                             <AddIcon />
                         </Fab>
-                        <p>Travel History</p>
+                        <p>Recent Travels</p>
+                        <Pop
+                            label={<ErrorOutlineIcon />}
+                            title={<span></span>}
+                            texts={travelText}
+                            linkIndex={travelLinkIndex}
+                            listIndex={travelListIndex} />
                     </div>
                     {locations}
-                    <div style={{ height: '100px' }} ref={pageBottomRef}></div>
+                    <div style={{ height: '0px' }} ref={pageBottomRef}></div>
                 </form>
             </div>
             <Fab style={{ background: "#EA2027" }} aria-label="add" href={nextPage} size="medium" className="fab next-btn">

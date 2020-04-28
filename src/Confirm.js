@@ -2,6 +2,7 @@ import React from 'react'
 import { Fab } from '@material-ui/core';
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft'
 export default function Confirm() {
+    const isSick = localStorage.isSick
     function handleClick(e) {
         localStorage.setItem('tested', e);
     }
@@ -27,7 +28,7 @@ export default function Confirm() {
                 </div>
 
             </div>
-            <Fab style={{ background: "#9206FF" }} href="/alert" size="medium" className="fab back-btn" >
+            <Fab style={{ background: "#9206FF" }} href={isSick==="sick"?'/alert':'/onboard'} size="medium" className="fab back-btn" >
                 <ArrowLeftIcon />
             </Fab>
         </div>

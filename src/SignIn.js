@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -55,9 +56,25 @@ const useStyles = makeStyles((theme) => ({
     height: '490px'
   }
 }));
-
+const data = { email: 'aa', password:"bb" };
 export default function SignIn() {
   const classes = useStyles();
+  fetch('http://13.57.220.143/login', {
+    method: 'POST', // or 'PUT'
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    },
+    // mode:'no-cors',
+    body: JSON.stringify(data),
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
 
   return (
     <Container className={classes.container} component="main" >

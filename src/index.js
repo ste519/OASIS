@@ -24,13 +24,14 @@ import MomentUtils from '@date-io/moment';
 import Dashboard from './Dashboard';
 import HealthMeasurements from './HealthMeasurements';
 import SignUp from './SignUp';
+import MoreInfo from './MoreInfo';
 
 ReactDOM.render(
   <React.StrictMode>
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <Router>
         <Link to="/" className="header">OASIS</Link>
-        <Link className="sign-in-btn" to="/signin"><span>SIGN IN</span></Link>
+        {/* <Link className="sign-in-btn" to="/signin"><span>SIGN IN</span></Link> */}
 
         <Switch>
           <Route exact path="/" component={App} />
@@ -45,6 +46,8 @@ ReactDOM.render(
           <Route path="/confirm" component={Confirm} />
           <Route path="/measurements" component={HealthMeasurements} />
           <Route path="/signup" component={SignUp} />
+          <Route path="/moreinfo" component={MoreInfo} />
+
         </Switch>
       </Router>
     </MuiPickersUtilsProvider>

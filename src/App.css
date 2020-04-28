@@ -14,13 +14,19 @@ html, #root, body {
   height: 100%;
   margin: 0;
 }
+
 .hidden {
   display: none;
 }
-.App, .Alert, .Onboard {
+
+.App, .Alert, .Onboard, .Confirm, .Symptoms, .CriticalQuestions {
   text-align: center;
   position: relative;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 a, a:link, a:visited, a:hover, a:active {
@@ -43,7 +49,6 @@ a, a:link, a:visited, a:hover, a:active {
 }
 
 .title {
-  position: absolute;
   font-family: Rubik;
   font-style: normal;
   font-weight: normal;
@@ -54,23 +59,17 @@ a, a:link, a:visited, a:hover, a:active {
 
 .App .title {
   width: 270px;
-  height: 135px;
-  left: calc(50% - 270px/2);
-  top: 30%;
 }
 
-.Onboard .title {
-  width: 343px;
-  height: 45px;
-  left: calc(50% - 343px/2);
-  top: 30%;
+.Alert .title, .warnings a {
+  color: #ea1f27
 }
 
-.Alert .title {
-  width: 320px;
-  height: 270px;
-  left: calc(50% - 320px/2);
-  top: 30%;
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .fab {
@@ -106,17 +105,13 @@ a, a:link, a:visited, a:hover, a:active {
   font-size: 16px;
   line-height: 20px;
   color: #FFFFFF;
-width: 100%;
+  width: 100%;
   align-self: center;
 }
 
 .Onboard .btn-group {
-  position: absolute;
-  width: 343px;
-  height: 308px;
-  /* margin: 406px auto 0 auto; */
-  top: 40%;
-  left: calc(50% - 343px/2);
+  width: 150px;
+  height: 200px;
 }
 
 .btn-n-caption {
@@ -159,101 +154,12 @@ width: 100%;
   margin: 4px 4px 0px 4px;
 }
 
-.check-my-risk-btn {
-  right: 0;
-  top: calc(50% - 95px/2)
-}
-
-.i-have-covid-btn {
-  left: 0;
-  top: calc(50% - 95px/2)
-}
-
-.do-i-have-covid-btn {
-  top: 0;
-  left: calc(50% - 114px/2)
-}
-
 .cancel-btn {
   bottom: 0;
   width: max-content;
   height: max-content;
   position: absolute;
   left: calc(50% - 70px/2);
-}
-
-.Alert .btn-group {
-  width: 150px;
-  height: 70px;
-  /* margin: 475px auto 0 auto; */
-  position: absolute;
-  /* top: 500px; */
-  left: calc(50% - 150px/2);
-  top: 60%;
-}
-
-.Alert .yes-btn {
-  position: absolute;
-  left: 0;
-}
-
-.Alert .no-btn {
-  position: absolute;
-  right: 0px;
-}
-
-.i-have-covid, .do-i-have-covid, .check-my-risk {
-  position: absolute !important;
-  color: white !important;
-  width: 56px !important;
-  height: 56px !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-.i-have-covid {
-  background-color: #EA2027 !important;
-  bottom: 20px;
-}
-
-.do-i-have-covid {
-  background-color: #0559FD !important;
-  bottom: 100px;
-  left: calc(50% - 56px/2)
-}
-
-.check-my-risk {
-  background-color: #FFC700 !important;
-  right: 0;
-  bottom: 20px;
-}
-
-/* .MuiSpeedDial-actions {
-  position: relative;
-  width: 250px;
-} */
-
-.Emergency .fab {
-  position: absolute;
-  left: calc(50% - 56px/2);
-  top: 500px;
-  /* bottom: 35.72%; */
-}
-
-.Emergency .title {
-  position: absolute;
-  width: 340px;
-  height: 270px;
-  left: calc(50% - 343px/2);
-  top: calc(50% - 270px/2);
-  font-family: Rubik;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 32px;
-  line-height: 125%;
-  /* or 45px */
-  text-align: center;
-  color: #FFFFFF;
 }
 
 .textfields {
@@ -282,13 +188,6 @@ width: 100%;
   margin-right: 1rem !important;
 }
 
-.CriticalQuestions .title, .Symptoms .title, .HealthMeasurements .title {
-  position: absolute;
-  width: 300px;
-  top: 10%;
-  left: calc(50% - 300px/2)
-}
-
 .next-btn {
   position: fixed !important;
   right: 20px;
@@ -306,12 +205,8 @@ width: 100%;
 }
 
 .Symptoms .subtitle {
-  position: absolute;
-  top: 20%;
-  text-align: center;
-  font-size: 14px;
   width: 340px;
-  left: calc(50% - 340px/2);
+  line-height: 1.5rem;
 }
 
 .dot {
@@ -323,21 +218,8 @@ width: 100%;
   margin-right: 10px;
 }
 
-/* .status-list{
-  position:absolute;
-  top:15%;
-} */
-
 .sick-btn span, .not-sick-btn span {
   width: 150px;
-}
-
-.sick-btn {
-  top: 20%;
-}
-
-.not-sick-btn {
-  top: 30%;
 }
 
 .Confirm .btn-group {
@@ -347,9 +229,6 @@ width: 100%;
   justify-content: space-evenly;
   width: 250px;
   align-items: center;
-  position: absolute;
-  top: 45%;
-  left: calc(50% - 250px/2);
 }
 
 .Confirm .btn-group .fab {
@@ -374,8 +253,13 @@ width: 100%;
 
 .suggestions-wrapper a {
   font-size: 18px;
-  line-height: 1.5rem;
+  line-height: 26px;
   text-decoration: underline;
+}
+
+.suggestions-wrapper div {
+  font-size: 18px;
+  line-height: 26px;
 }
 
 .col {
@@ -409,7 +293,6 @@ width: 100%;
   margin-bottom: 10px;
 }
 
-
 .breadcrumbs .MuiBreadcrumbs-ol {
   color: white;
   font-family: Abel;
@@ -418,3 +301,22 @@ width: 100%;
   top: 28px;
 }
 
+.terms-wrapper {
+  overflow-y: scroll;
+  padding: 1rem 2rem;
+  max-height: 400px;
+  font-size: 14px;
+  line-height: 1.5rem;
+}
+
+.terms-wrapper a {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+}
+
+.warnings {
+  text-align: left;
+  width: 80%;
+  padding-bottom: 48px;
+}

@@ -3,56 +3,58 @@ import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import Button from '@material-ui/core/Button';
 
-const useStyles = makeStyles((theme) => ({
-  popover: {
-    pointerEvents: 'none',
-  },
-  paper: {
-    padding: theme.spacing(1),
-  },
-}));
-
-export default function MouseOverPopover(props) {
-  const classes = useStyles();
+export default function Pop(props) {
+  
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handlePopoverOpen = (event) => {
+  const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handlePopoverClose = () => {
+  const handleClose = () => {
     setAnchorEl(null);
   };
 
   const open = Boolean(anchorEl);
-
+  const id = open ? 'simple-popover' : undefined;
+  
   return (
     <div>
-        <ErrorOutlineIcon  aria-owns={open ? 'mouse-over-popover' : undefined}
+      <div aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>{props.label}</div>
+      {/* <ErrorOutlineIcon  aria-owns={open ? 'mouse-over-popover' : undefined}
         aria-haspopup="true"
         onMouseEnter={handlePopoverOpen}
-        onMouseLeave={handlePopoverClose}></ErrorOutlineIcon>
+        onMouseLeave={handlePopoverClose}></ErrorOutlineIcon> */}
       <Popover
-        id="mouse-over-popover"
-        className={classes.popover}
-        classes={{
-          paper: classes.paper,
-        }}
+        id={id}
         open={open}
         anchorEl={anchorEl}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
+          vertical: 'center',
+          horizontal: 'center',
         }}
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
+          vertical: 'center',
+          horizontal: 'center',
         }}
-        onClose={handlePopoverClose}
-        disableRestoreFocus
+        onClose={handleClose}
+        // disableRestoreFocus
       >
-        <Typography>{props.text}</Typography>
+        <div className="terms-wrapper" onClick={handleClose}>
+          {props.title}
+          
+            {props.texts.map((x, i) => {
+              if (props.listIndex.indexOf(i) >= 0)
+                return <p key={i}>● {x}</p>
+              else if (props.linkIndex.indexOf(i) >= 0)
+                return <a key={i} href={x}>{x}</a>
+              else
+                return <p key={i}>{x}</p>
+            })
+          }
+        </div>
       </Popover>
     </div>
   );

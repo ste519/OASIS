@@ -11,8 +11,6 @@ const symptoms = ["fever", "cough", "short of breath", "chest pain", "sore throa
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        position: 'absolute',
-        top: '28%',
         width: '100vw'
     },
     group: {
@@ -49,19 +47,23 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center'
     },
 }));
+
+
 export default function Symptoms() {
     const [state, setState] = React.useState({});
+    
 
     const handleChange = (event) => {
         setState({ ...state, [event.target.name]: event.target.checked });
     };
 
     const classes = useStyles();
-
+    const recovered = (localStorage.isSick === "not sick") && (localStorage.tested === "positive")
+    const subtitle = recovered?"When you were sick, which of the following symptoms did you have?":"Are you having now, or did you recently have:"
     return (
         <div className="Symptoms">
             <h1 className="title"> MY COVID STORY</h1>
-            <p className="subtitle"> Are you having now, or did you recently have:</p>
+            <p className="subtitle">{subtitle}</p>
             <FormControl className={classes.root} component="fieldset">
                 <FormGroup className={classes.group} aria-label="position" row>
                     {symptoms.map((option) => (

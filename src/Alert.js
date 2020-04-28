@@ -1,25 +1,34 @@
 import React from 'react'
 import { Fab } from '@material-ui/core';
-import ArrowLeftIcon from '@material-ui/icons/ArrowLeft'
+import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
+import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import Text from './text.json';
+
+const texts = Text["Warning Signs"].texts
+const listIndex = Text["Warning Signs"].listIndex
+const linkIndex = Text["Warning Signs"].linkIndex
+
 export default function Alert(props) {
     return (
         <div className="Alert">
-            <h2 className="title">ARE YOU CURRENTLY GASPING FOR AIR OR HAVE SEVERE CHEST PAIN OR WEAKNESS?</h2>
-            <div className="btn-group">
-                <div className="yes-btn">
-                    <Fab style={{ background: "#EA2027" }} aria-label="add" href="/emergency" size="large" className="fab">
-                        <span>YES</span>
-                    </Fab>
-                </div>
-                <div className="no-btn">
-                    <Fab style={{ background: "#0559FD" }} aria-label="add" href="/confirm" size="large" className="fab">
-                        <span>NO</span>
-                    </Fab>
-                </div>
+
+            <h1 className="title">WARNING</h1>
+            <div className="warnings">
+                {texts.map((x, i) => {
+                    if (listIndex.indexOf(i) >= 0)
+                        return <p key={i}>● {x}</p>
+                    else if (linkIndex.indexOf(i) >= 0)
+                        return <a key={i} href={x}>{x}</a>
+                    else
+                        return <p key={i}>{x}</p>
+                })}
                 <Fab style={{ background: "#9206FF" }} aria-label="add" href="/onboard" size="medium" className="fab back-btn">
-                <ArrowLeftIcon />
-            </Fab>
+                    <ArrowLeftIcon />
+                </Fab>
+                <Fab style={{ background: "#EA2027" }} aria-label="add" href='/confirm' size="medium" className="fab next-btn">
+                    <ArrowRightIcon />
+                </Fab>
             </div>
-        </div>
+        </div >
     )
 }

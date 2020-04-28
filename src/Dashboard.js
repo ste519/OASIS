@@ -1,24 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import SpeedDial from '@material-ui/lab/SpeedDial';
-import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
-import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
-import Fab from '@material-ui/core/Fab';
-import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
-import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import Link from '@material-ui/core/Link';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs'
 import EditIcon from '@material-ui/icons/Edit';
+import Text from './text.json';
 
 const useStyles = makeStyles((theme) => ({
     speedDial: {
-        // position: 'absolute',
-        // bottom: theme.spacing(2),
-        // right: theme.spacing(2),
         '& .MuiFab-label': {
             width: 'max-content'
         }
@@ -38,11 +26,11 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const actions = [
-    { icon: "I FELL BETTER", name: 'I FELL BETTER', href: '/donations' },
-    { icon: <SpeedDialIcon />, name: 'I AM RECOVERED', href: '/trails' },
-    { icon: <SpeedDialIcon />, name: 'I feel worse', href: '/status' },
-];
+// const actions = [
+//     { icon: "I FELL BETTER", name: 'I FELL BETTER', href: '/donations' },
+//     { icon: <SpeedDialIcon />, name: 'I AM RECOVERED', href: '/trails' },
+//     { icon: <SpeedDialIcon />, name: 'I feel worse', href: '/status' },
+// ];
 
 const status =
 {
@@ -56,7 +44,7 @@ const status =
 
 let isSick = localStorage.isSick;
 let tested = localStorage.tested;
-if (isSick == "not sick" && tested == "positive") {
+if (isSick === "not sick" && tested === "positive") {
     isSick = "recovered"
 }
 export default function Dashboard(props) {
@@ -94,7 +82,7 @@ export default function Dashboard(props) {
 
     let donate_link = null;
     let trial_link = null;
-    if (localStorage.isSick == "not sick" && localStorage.tested == "positive") {
+    if (localStorage.isSick === "not sick" && localStorage.tested === "positive") {
         donate_link = <Link href="#" style={{ color: '#EB5757' }}>Donate your blood to help others</Link>
     }
     else {
@@ -132,34 +120,6 @@ export default function Dashboard(props) {
 
                         </div>
                     </div>
-
-                    {/* <div>
-                        <SpeedDial
-                            ariaLabel="SpeedDial tooltip example"
-                            className={classes.speedDial}
-                            hidden={hidden}
-                            icon={<SpeedDialIcon />}
-                            onClose={handleClose}
-                            onOpen={handleOpen}
-                            direction="down"
-                            open={open}
-                            FabProps={{ className: classes.button }}
-                        >
-                            {actions.map((action) => (
-                                <SpeedDialAction
-                                    key={action.name}
-                                    icon={action.name}
-                                    display={{ background: action.color }}
-                                    tooltipTitle={action.name}
-                                    className={"MuiFab-extended"}
-                                    // tooltipOpen
-
-                                    onClick={() => props.history.push(action.href)}
-                                ></SpeedDialAction>
-                            ))}
-                        </SpeedDial>
-
-                    </div> */}
                 </div>
                 <div className="col update-list" style={{ textAlign: 'right' }}>
                     <h3>LATEST UPDATE</h3>
@@ -170,21 +130,16 @@ export default function Dashboard(props) {
                     </div>
                 </div>
 
-
-
             </div>
 
             <div className="col suggestions-wrapper">
                 <h3>SUGGESTIONS</h3>
-                <Link href="#" onClick={preventDefault} style={{ color: '#FFFFFF' }}>Stay at home</Link>
-                <Link href="#" onClick={preventDefault} style={{ color: '#2D9CDB' }}>Download HomeBound</Link>
+                <div style={{color: "gray"}}>Stay at home</div>
+                <Link href="https://earth2-covid.ucsd.edu/homebound" style={{ color: '#2D9CDB' }}>Download HomeBound</Link>
                 <Link href="#" onClick={preventDefault} style={{ color: '#F2C94C' }}>Join a clinical trial</Link>
                 {donate_link}
+                <Link href="/moreinfo" style={{ color: '#FFFFFF' }}>Learn more about COVID-19</Link>
             </div>
-
-            {/* <Fab style={{ background: "#9206FF" }} aria-label="add" href="/symptoms" size="medium" className="back-btn">
-                <ArrowLeftIcon />
-            </Fab> */}
         </div>
     );
 }
