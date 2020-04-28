@@ -100,5 +100,22 @@
     "More Information": [
         "Coronavirus.gov",
         "Who.net/covid-19"
+    ],
+    "Symptoms": [
+        "Fever / Chills",
+        "Cough",
+        "Shortness of breath / Difficulty breathing",
+        "Chest pressure / Chest pain",
+        "Fatigue/exhaustion",
+        "Muscle pain",
+        "Headache",
+        "Sore throat",
+        "Nasal congestion",
+        "Sneezing",
+        "New loss of taste or smell",
+        "Dizziness",
+        "Abdominal pain / Nausea",
+        "Vomiting",
+        "Diarrhea"
     ]
 }

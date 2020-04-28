@@ -5,53 +5,57 @@ import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import Text from './text.json';
 
-const symptoms = ["fever", "cough", "short of breath", "chest pain", "sore throat", "exhaustion",
-    "body aches", "headache", "runny nose", "loss of smell", "nausea", "vomiting", "diarrhea"]
+const symptoms = Text["Symptoms"]
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '100vw'
+        width: '90vw',
+    overflow: 'scroll',
+    height: 'max-content'
     },
     group: {
         '& > *': {
-            margin: theme.spacing(1),
-            width: '29%',
+            margin:0,
+            width: '30vw',
         },
         '& .MuiTypography-body1': {
-            'font-size': '15px',
-        },
-    },
-    input: {
-        color: 'white',
-        '&:before': {
-            borderBottom: '1px solid white',
-        },
+            fontSize: 14,
+            fontFamily: 'abel'
+        }
 
     },
+    input: {
+    color: 'white',
+    '&:before': {
+        borderBottom: '1px solid white',
+    },
+
+},
     label: {
-        color: 'white',
-        width: 'max-content',
-        fontSize: 16
-    },
+    color: 'white',
+    width: 'max-content',
+    fontSize: 16
+},
     numbers: {
-        '& > *': {
-            margin: theme.spacing(1),
-            width: '46%',
-        },
-        position: 'absolute',
-        top: '77%',
-        width: '100vw',
-        display:'flex',
-        justifyContent:'space-evenly',
-        alignItems: 'center'
+    '& > *': {
+        margin: theme.spacing(1),
+        width: '46%',
     },
+    position: 'absolute',
+    top: '77%',
+    width: '100vw',
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    alignItems: 'center'
+},
 }));
 
 
 export default function Symptoms() {
     const [state, setState] = React.useState({});
-    
+
 
     const handleChange = (event) => {
         setState({ ...state, [event.target.name]: event.target.checked });
@@ -59,7 +63,7 @@ export default function Symptoms() {
 
     const classes = useStyles();
     const recovered = (localStorage.isSick === "not sick") && (localStorage.tested === "positive")
-    const subtitle = recovered?"When you were sick, which of the following symptoms did you have?":"Are you having now, or did you recently have:"
+    const subtitle = recovered ? "When you were sick, which of the following symptoms did you have?" : "Are you having now, or did you recently have:"
     return (
         <div className="Symptoms">
             <h1 className="title"> MY COVID STORY</h1>
@@ -69,7 +73,7 @@ export default function Symptoms() {
                     {symptoms.map((option) => (
                         <FormControlLabel
                             value={option}
-                            control={<Checkbox style={{ color: "white" }} icon={<RadioButtonUncheckedIcon style={{ fontSize: 30 }}/>} checkedIcon={<CheckCircle style={{ fontSize: 30 }}/>} />}
+                            control={<Checkbox style={{ color: "white" }} icon={<RadioButtonUncheckedIcon style={{ fontSize: 30 }} />} checkedIcon={<CheckCircle style={{ fontSize: 30 }} />} />}
                             label={option}
                             key={option}
                             labelPlacement="top"
@@ -108,7 +112,7 @@ export default function Symptoms() {
                     }}
                 />
             </div> */}
-      
+
             <Fab style={{ background: "#EA2027" }} aria-label="add" href="/measurements" size="medium" className="fab next-btn">
                 <ArrowRightIcon />
             </Fab>
