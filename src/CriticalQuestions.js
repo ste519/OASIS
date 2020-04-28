@@ -8,7 +8,6 @@ import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import { DatePicker } from "@material-ui/pickers";
 import Pop from './Pop';
 import Text from './text.json';
-import moment from 'moment'
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 
 const contactText = Text["Close Contacts"].texts
@@ -39,7 +38,7 @@ const styles = theme => ({
         flexDirection: 'column',
         overflow: 'auto',
         height: 'max-content',
-        maxHeight: '68%'
+        maxHeight: '69%'
     },
     input: {
         color: 'white',
@@ -307,7 +306,7 @@ function CriticalQuestions(props) {
                             listIndex={travelListIndex} />
                     </div>
                     {locations}
-                    <div style={{ height: '0px' }} ref={pageBottomRef}></div>
+                    <div style={{ height: '20px' }} ref={pageBottomRef}></div>
                 </form>
             </div>
             <Fab style={{ background: "#EA2027" }} aria-label="add" href={nextPage} size="medium" className="fab next-btn">

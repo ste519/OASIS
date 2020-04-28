@@ -19,7 +19,7 @@ html, #root, body {
   display: none;
 }
 
-.App, .Alert, .Onboard, .Confirm, .Symptoms, .CriticalQuestions {
+.App, .Alert, .Onboard, .Confirm, .Symptoms, .CriticalQuestions, .HealthMeasurements {
   text-align: center;
   position: relative;
   height: 100%;
@@ -319,4 +319,12 @@ a, a:link, a:visited, a:hover, a:active {
   text-align: left;
   width: 80%;
   padding-bottom: 48px;
+}
+
+.sliders-wrapper {
+  width: 300px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

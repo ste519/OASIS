@@ -138,7 +138,7 @@ export default function Dashboard(props) {
                 <Link href="https://earth2-covid.ucsd.edu/homebound" style={{ color: '#2D9CDB' }}>Download HomeBound</Link>
                 <Link href="#" onClick={preventDefault} style={{ color: '#F2C94C' }}>Join a clinical trial</Link>
                 {donate_link}
-                <Link href="/moreinfo" style={{ color: '#FFFFFF' }}>Learn more about COVID-19</Link>
+                <Link onClick={preventDefault} style={{ color: '#FFFFFF' }}>Learn more about COVID-19</Link>
             </div>
         </div>
     );

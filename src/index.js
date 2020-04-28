@@ -46,7 +46,7 @@ ReactDOM.render(
           <Route path="/confirm" component={Confirm} />
           <Route path="/measurements" component={HealthMeasurements} />
           <Route path="/signup" component={SignUp} />
-          <Route path="/moreinfo" component={MoreInfo} />
+          {/* <Route path="/moreinfo" component={MoreInfo} /> */}
 
         </Switch>
       </Router>
