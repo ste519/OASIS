@@ -1,8 +1,8 @@
 {
     "Terms and Conditions": {
         "texts": [
-            "The OASIS platform is a public space for citizens to report health and environmental problems, like COVID  cases, potential illness, or sick contacts.  We are based at the University of California San Diego with support from the University and sponsors like Microsoft foundation AI4 Health. We believe everyone can contribute to creating a living map of all of Us and our planet.",
-            "The intent of the OASIS is to tell your story and share it in a privacy preserving way that gives greater insight into where the virus is, how it’s spreading, and to help alert others that may be at risk. As OASIS grows we will update our terms of service so stay tuned.",
+            "The OASIS platform is a public space for citizens to report health and environmental hazards, like COVID cases, potential illness, or sick contacts. We are based at the University of California San Diego with support from the University and sponsors like Microsoft foundation AI4 Health. We believe everyone can contribute to creating a living map of all of Us and our planet.",
+            "The intent of OASIS is to tell your story and share it in a privacy preserving way that gives greater insight into where the virus is, how it’s spreading, and to help alert others that may be at risk. As OASIS grows we will update our terms of service so stay tuned.",
             "We will never share your identity unless you consent.",
             "If you sign up and any data is stored, you own that data and can delete your account and any data in it.",
             "We will preserve the privacy of your location using the best methods available.",
@@ -10,8 +10,8 @@
             "We will never sell any of your data to any third party.",
             "You may consent to join research studies in an agreement between you, the user, and the third party via separate agreements.",
             "All data entered besides your personal identifiable information is meant to be shared with the public in a privacy preserving manner which means the public can aggregated data but not your individual personal health information.",
-            "This application is not a medical system, it makes no diagnoses and provides only data reported by our users.",
-            "Any links are to established government sites, or research activities with prior ethical approval.",
+            "This application is not a medical system, it makes no diagnoses or predictions and provides only data reported by our users.",
+            "Any links are to established and trusted government sites, or research activities with prior ethical approval.",
             "This app uses encryption in transit and secure encryption of passwords, current hosting is on a secure server using best in class security"
         ],
         "listIndex": [
@@ -102,19 +102,19 @@
         "Who.net/covid-19"
     ],
     "Symptoms": [
-        "Fever / Chills",
+        "Fever/Chills",
         "Cough",
-        "Shortness of breath / Difficulty breathing",
-        "Chest pressure / Chest pain",
+        "Shortness of breath",
+        "Chest pressure/pain",
         "Fatigue/exhaustion",
         "Muscle pain",
         "Headache",
         "Sore throat",
         "Nasal congestion",
         "Sneezing",
-        "New loss of taste or smell",
+        "Loss of taste/smell",
         "Dizziness",
-        "Abdominal pain / Nausea",
+        "Nausea",
         "Vomiting",
         "Diarrhea"
     ]
