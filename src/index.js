@@ -6,51 +6,56 @@ import {
   Switch,
   Link,
 } from "react-router-dom";
-import App from './App';
-import SignIn from './SignIn';
-import Onboard from './Onboard';
-import Alert from './Alert';
-import Emergency from './Emergency';
-import CriticalQuestions from './CriticalQuestions';
+import { Provider } from 'react-redux'
+import store from './store'
+
+import App from './routes/App';
+import SignIn from './routes/SignIn';
+import Onboard from './routes/Onboard';
+import Alert from './routes/Alert';
+import CriticalQuestions from './routes/CriticalQuestions';
 import * as serviceWorker from './serviceWorker';
-import Symptoms from './Symptoms';
-import Status from './Status';
-import Confirm from './Confirm';
+import Symptoms from './routes/Symptoms';
+import Confirm from './routes/Confirm';
+import Map from './elements/Map'
 
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 // pick a date util library
 import MomentUtils from '@date-io/moment';
-import Dashboard from './Dashboard';
-import HealthMeasurements from './HealthMeasurements';
-import SignUp from './SignUp';
-import MoreInfo from './MoreInfo';
+import Dashboard from './routes/Dashboard';
+import HealthMeasurements from './routes/HealthMeasurements';
+import SignUp from './routes/SignUp';
 
 ReactDOM.render(
   <React.StrictMode>
+     
+     <Provider store={store}>
+  
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <Router>
         <Link to="/" className="header">OASIS</Link>
         {/* <Link className="sign-in-btn" to="/signin"><span>SIGN IN</span></Link> */}
-
+        <Map></Map>
         <Switch>
           <Route exact path="/" component={App} />
           <Route path="/signin" component={SignIn} />
           <Route path="/onboard" component={Onboard} />
           <Route path="/alert" component={Alert} />
-          <Route path="/emergency" component={Emergency} />
           <Route path="/questions" component={CriticalQuestions} />
           <Route path="/symptoms" component={Symptoms} />
           <Route path="/dashboard" component={Dashboard} />
-          <Route path="/status" component={Status} />
           <Route path="/confirm" component={Confirm} />
           <Route path="/measurements" component={HealthMeasurements} />
           <Route path="/signup" component={SignUp} />
           {/* <Route path="/moreinfo" component={MoreInfo} /> */}
-
+          
         </Switch>
+        
       </Router>
     </MuiPickersUtilsProvider>
+    </Provider>
+   
   </React.StrictMode>,
   document.getElementById('root')
 );
