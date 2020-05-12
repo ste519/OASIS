@@ -9,6 +9,7 @@ import { DatePicker } from "@material-ui/pickers";
 import Pop from '../elements/Pop';
 import Text from '../text.json';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
+import { useSelector } from "react-redux";
 
 const contactText = Text["Close Contacts"].texts
 const contactListIndex = Text["Close Contacts"].listIndex
@@ -96,8 +97,6 @@ function CriticalQuestions(props) {
     const [isLoaded, setIsLoaded] = React.useState(false);
     const [countries, setCountries] = React.useState([]);
 
-
-    const recovered = (localStorage.isSick === "not sick") && (localStorage.tested === "positive")
     const endPicker = <DatePicker
         autoOk
         label="When did your illness resolve?"
@@ -168,11 +167,14 @@ function CriticalQuestions(props) {
     React.useEffect(scrollToBottom, [contacts]);
     let showDatePicker;
     let nextPage;
-    if (localStorage.isSick === "not sick") {
+    const isSick = useSelector(state => state.post.sick);
+    const tested = useSelector(state => state.post.tested);
+    console.log(isSick, tested)
+    if (isSick === "not sick") {
         nextPage = "/dashboard";
-        if (localStorage.tested === "not tested")
+        if (tested === "not tested")
             showDatePicker = "hidden";
-        else if (localStorage.tested === "positive") {
+        else if (tested === "positive") {
             showDatePicker = "";
             nextPage = "/symptoms"
         }
@@ -187,7 +189,6 @@ function CriticalQuestions(props) {
 
     return (
         <div className="CriticalQuestions">
-            <div className="dark mask"></div>
             <h1 className="title"> MY COVID STORY</h1>
             <div className={classes.root}>
                 <form noValidate>
@@ -203,7 +204,7 @@ function CriticalQuestions(props) {
                             InputProps={{ className: classes.input }}
                             InputLabelProps={{ className: classes.label }}
                         />
-                        {recovered ? endPicker : null}
+                        {isSick==="recovered" ? endPicker : null}
 
 
                     </div>

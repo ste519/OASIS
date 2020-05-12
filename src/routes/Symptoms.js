@@ -6,18 +6,19 @@ import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import Text from '../text.json';
+import { useSelector } from 'react-redux';
 
 const symptoms = Text["Symptoms"]
 
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '90vw',
-    overflow: 'scroll',
-    height: 'max-content'
+        overflow: 'scroll',
+        height: 'max-content'
     },
     group: {
         '& > *': {
-            margin:0,
+            margin: 0,
             width: '30vw',
         },
         '& .MuiTypography-body1': {
@@ -27,29 +28,29 @@ const useStyles = makeStyles((theme) => ({
 
     },
     input: {
-    color: 'white',
-    '&:before': {
-        borderBottom: '1px solid white',
-    },
+        color: 'white',
+        '&:before': {
+            borderBottom: '1px solid white',
+        },
 
-},
-    label: {
-    color: 'white',
-    width: 'max-content',
-    fontSize: 16
-},
-    numbers: {
-    '& > *': {
-        margin: theme.spacing(1),
-        width: '46%',
     },
-    position: 'absolute',
-    top: '77%',
-    width: '100vw',
-    display: 'flex',
-    justifyContent: 'space-evenly',
-    alignItems: 'center'
-},
+    label: {
+        color: 'white',
+        width: 'max-content',
+        fontSize: 16
+    },
+    numbers: {
+        '& > *': {
+            margin: theme.spacing(1),
+            width: '46%',
+        },
+        position: 'absolute',
+        top: '77%',
+        width: '100vw',
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        alignItems: 'center'
+    },
 }));
 
 
@@ -62,11 +63,10 @@ export default function Symptoms(props) {
     };
 
     const classes = useStyles();
-    const recovered = (localStorage.isSick === "not sick") && (localStorage.tested === "positive")
-    const subtitle = recovered ? "When you were sick, which of the following symptoms did you have?" : "Are you having now, or did you recently have:"
+    const isSick = useSelector(state => state.post.sick)
+    const subtitle = isSick==="recovered"? "When you were sick, which of the following symptoms did you have?" : "Are you having now, or did you recently have:"
     return (
         <div className="Symptoms">
-            <div className="dark mask"></div>
             <h1 className="title"> MY COVID STORY</h1>
             <p className="subtitle">{subtitle}</p>
             <FormControl className={classes.root} component="fieldset">
@@ -114,10 +114,10 @@ export default function Symptoms(props) {
                 />
             </div> */}
 
-            <Fab style={{ background: "#EA2027" }} aria-label="add" onClick={()=>props.history.push("/measurements")} size="medium" className="fab next-btn">
+            <Fab style={{ background: "#EA2027" }} aria-label="add" onClick={() => props.history.push("/measurements")} size="medium" className="fab next-btn">
                 <ArrowRightIcon />
             </Fab>
-            <Fab style={{ background: "#9206FF" }} aria-label="add" onClick={()=>props.history.push("/questions")} size="medium" className="fab back-btn">
+            <Fab style={{ background: "#9206FF" }} aria-label="add" onClick={() => props.history.push("/questions")} size="medium" className="fab back-btn">
                 <ArrowLeftIcon />
             </Fab>
         </div>

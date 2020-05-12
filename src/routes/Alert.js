@@ -11,7 +11,7 @@ const linkIndex = Text["Warning Signs"].linkIndex
 export default function Alert(props) {
     return (
         <div className="Alert">
-            <div className="dark mask"></div>
+            {/* <div className="dark mask"></div> */}
             <h1 className="title">WARNING</h1>
             <div className="warnings">
                 {texts.map((x, i) => {

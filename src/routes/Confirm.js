@@ -1,16 +1,23 @@
 import React from 'react'
 import { Fab } from '@material-ui/core';
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft'
+import { handleTested} from '../actions/handleTested';
+import { useDispatch, useSelector } from 'react-redux'
+
 export default function Confirm(props) {
-    const isSick = localStorage.isSick
-    function handleClick(e) {
-        localStorage.setItem('tested', e);
+    const isSick = useSelector(state => state.post.sick)
+    // const isSick = userlocalStorage.isSick
+
+    const dispatch = useDispatch();
+    function handleClick(selected) {
+        localStorage.setItem('tested', selected);
+        dispatch(handleTested(selected));
     }
 
     return (
         <div className="Confirm">
             <h1 className="title">HAVE YOUR BEEN TESTED FOR COVID-19?</h1>
-            <div className="dark mask"></div>
+           
             <div className="btn-group">
                 <div className="yes-btn">
                     <Fab style={{ background: "#EA2027" }} size="large" className="fab" variant="extended" onClick={()=>{handleClick('positive');props.history.push("/questions")}}>

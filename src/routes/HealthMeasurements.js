@@ -144,7 +144,6 @@ function HealthMeasurements(props) {
 
     return (
         <div className="HealthMeasurements">
-            <div className="dark mask"></div>
             <h1 className="title"> MY COVID STORY</h1>
             <div className="sliders-wrapper">
                 <Typography id="temp-slider" gutterBottom>Temperature</Typography>

@@ -5,13 +5,13 @@ import chroma from 'chroma-js';
 mapboxgl.accessToken = 'pk.eyJ1Ijoic3RlNTE5IiwiYSI6ImNrOHc1aHlvYTB0N2ozam51MHFiazE3bmcifQ.AHtFuA-pAqau_AJIy-hzOg';
 // let dark = false;
 
-export default class Application extends React.PureComponent {
+export default class Application extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            lng: -99.9,
-            lat: 40.5,
-            zoom: 3.7,
+            lng: -119.6,
+            lat: 36.7,
+            zoom: 5,
             dark:window.location.pathname!=="/" && window.location.pathname!=="/dashboard"
         };
         
@@ -138,7 +138,7 @@ export default class Application extends React.PureComponent {
                         'fill-color': expression
                     }
                 },
-                'waterway-label'
+                // 'road-label'
             );
 
             /*----------------------------  County Level Data ----------------------------------*/
@@ -209,6 +209,7 @@ export default class Application extends React.PureComponent {
     render() {
         return (
             <div>
+                  <div className="dark mask"></div>
                 <div id="map"></div>
             </div>
         )

@@ -3,8 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs'
 import EditIcon from '@material-ui/icons/Edit';
-import { connect } from 'react-redux'
-import { getOverall } from '../actions/getOverall'
 import { useDispatch, useSelector } from 'react-redux'
 
 import Text from '../text.json';
@@ -40,17 +38,16 @@ const status =
     "not tested": { name: 'Not Tested', color: 'blue' }
 }
 
-let isSick = localStorage.isSick;
-let tested = localStorage.tested;
-if (isSick === "not sick" && tested === "positive") {
-    isSick = "recovered"
-}
 function Dashboard(props) {
+
     const dispatch = useDispatch()
- 
+
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [hidden, setHidden] = React.useState(false);
+
+    const isSick = useSelector(state => state.post.sick);
+    const tested = useSelector(state => state.post.tested);
 
     const handleOpen = () => {
         setOpen(true);
@@ -90,10 +87,9 @@ function Dashboard(props) {
     }
 
     const preventDefault = (event) => event.preventDefault();
-    const state = useSelector(state => state.overall);
+    // const data= useSelector(state => state.get.overall);
     return (
         <div className="Dashboard">
-            <div className="dark mask"></div>
             <Breadcrumbs aria-label="breadcrumb" className="breadcrumbs">
                 <Link color="inherit">myTrials</Link>
                 <Link color="inherit">myDonations</Link>
@@ -103,8 +99,8 @@ function Dashboard(props) {
                 <div className="col">
                     <div className="row">
                         <h3>MY STATUS</h3>
-                        <Link className="row status-item" style={{ color: 'white' }} onClick={()=>props.history.push("/onboard")}>
-                            <EditIcon className={classes.editicon}/>
+                        <Link className="row status-item" style={{ color: 'white' }} onClick={() => props.history.push("/onboard")}>
+                            <EditIcon className={classes.editicon} />
                         </Link>
                     </div>
 
@@ -135,7 +131,7 @@ function Dashboard(props) {
 
             <div className="col suggestions-wrapper">
                 <h3>SUGGESTIONS</h3>
-                <div style={{color: "gray"}}>Stay at home</div>
+                <div style={{ color: "gray" }}>Stay at home</div>
                 <Link href="https://earth2-covid.ucsd.edu/homebound" style={{ color: '#2D9CDB' }}>Download HomeBound</Link>
                 <Link href="#" onClick={preventDefault} style={{ color: '#F2C94C' }}>Join a clinical trial</Link>
                 {donate_link}
@@ -144,4 +140,4 @@ function Dashboard(props) {
         </div>
     );
 }
-export default(Dashboard)
+export default Dashboard;
